@@ -7,8 +7,8 @@
         <provider
             android:name=".provider.TrayContentProvider"
             android:authorities="${applicationId}.tray"
-            android:exported="false"
-            android:multiprocess="false" />
+            android:exported="true"
+            android:multiprocess="true" />
 
     </application>
 

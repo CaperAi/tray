@@ -18,10 +18,10 @@ package net.grandcentrix.tray;
 
 import net.grandcentrix.tray.provider.TrayProviderTestCase;
 
-public class AppPreferencesTest extends TrayProviderTestCase {
+public class CaperPreferencesTest extends TrayProviderTestCase {
 
     public void testInstantiation() throws Exception {
-        new AppPreferences(getProviderMockContext());
+        new CaperPreferences(getProviderMockContext());
     }
 
     public void testLegacyInstantiation() throws Exception {

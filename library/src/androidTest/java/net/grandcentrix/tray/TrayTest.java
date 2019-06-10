@@ -94,7 +94,7 @@ public class TrayTest extends TrayProviderTestCase {
         assertTrue(mTray.clearBut(module2));
         assertUserDatabaseSize(2);
 
-        final AppPreferences appPrefs = new AppPreferences(getProviderMockContext());
+        final CaperPreferences appPrefs = new CaperPreferences(getProviderMockContext());
         appPrefs.put("test", "value");
 
         assertUserDatabaseSize(3);
@@ -119,7 +119,7 @@ public class TrayTest extends TrayProviderTestCase {
         getProviderMockContext().enableMockResolver(true);
         final Tray tray = new Tray(getProviderMockContext());
 
-        tray.clearBut(new AppPreferences(getProviderMockContext()));
+        tray.clearBut(new CaperPreferences(getProviderMockContext()));
     }
 
     public void testEmptyKey() throws Exception {

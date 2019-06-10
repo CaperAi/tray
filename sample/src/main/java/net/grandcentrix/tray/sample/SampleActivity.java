@@ -16,7 +16,7 @@
 
 package net.grandcentrix.tray.sample;
 
-import net.grandcentrix.tray.AppPreferences;
+import net.grandcentrix.tray.CaperPreferences;
 import net.grandcentrix.tray.TrayPreferences;
 import net.grandcentrix.tray.core.OnTrayPreferenceChangeListener;
 import net.grandcentrix.tray.core.SharedPreferencesImport;
@@ -57,7 +57,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
 
     private static final String TAG = SampleActivity.class.getSimpleName();
 
-    private AppPreferences mAppPrefs;
+    private CaperPreferences mAppPrefs;
 
     private OnTrayPreferenceChangeListener mAppPrefsListener
             = new OnTrayPreferenceChangeListener() {
@@ -132,7 +132,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample);
 
-        mAppPrefs = new AppPreferences(this);
+        mAppPrefs = new CaperPreferences(this);
         mSharedPreferences = getSharedPreferences(SHARED_PREF_NAME,
                 Context.MODE_MULTI_PROCESS);
         int startupCount = mAppPrefs.getInt(STARTUP_COUNT, 0);
@@ -300,7 +300,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         {
             // device specific data
             final TrayPreferences deviceSpecificPref =
-                    new TrayPreferences(this, "nobackup", 1, TrayStorage.Type.DEVICE);
+                    new TrayPreferences(this, 1, TrayStorage.Type.DEVICE);
             final String deviceId = deviceSpecificPref.getString("deviceId", null);
             Log.v(TAG, "deviceId: " + deviceId);
             if (deviceId == null) {
@@ -313,7 +313,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         {
             // user specific data
             final TrayPreferences userSpecificPref =
-                    new TrayPreferences(this, "autobackup", 1, TrayStorage.Type.USER);
+                    new TrayPreferences(this, 1, TrayStorage.Type.USER);
             final String userId = userSpecificPref.getString("userId", null);
             Log.v(TAG, "userId: " + userId);
             if (userId == null) {

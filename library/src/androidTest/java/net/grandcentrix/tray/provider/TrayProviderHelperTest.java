@@ -16,7 +16,7 @@
 
 package net.grandcentrix.tray.provider;
 
-import net.grandcentrix.tray.AppPreferences;
+import net.grandcentrix.tray.CaperPreferences;
 import net.grandcentrix.tray.TrayPreferences;
 import net.grandcentrix.tray.core.TrayException;
 import net.grandcentrix.tray.core.TrayItem;
@@ -86,7 +86,7 @@ public class TrayProviderHelperTest extends TrayProviderTestCase {
         assertTrue(mProviderHelper.persist(context.getPackageName(), KEY_B, STRING_B));
         assertUserDatabaseSize(8);
 
-        mProviderHelper.clearBut(new AppPreferences(context),
+        mProviderHelper.clearBut(new CaperPreferences(context),
                 new TestTrayModulePreferences(context, MODULE_A),
                 new TestTrayModulePreferences(context, MODULE_B));
         assertUserDatabaseSize(6);
@@ -105,7 +105,7 @@ public class TrayProviderHelperTest extends TrayProviderTestCase {
         assertTrue(mProviderHelper.persist(MODULE_A, KEY_B, STRING_B));
         assertTrue(mProviderHelper.persist(context.getPackageName(), KEY_A, STRING_A));
         assertTrue(mProviderHelper.persist(context.getPackageName(), KEY_B, STRING_B));
-        mProviderHelper.clearBut(new AppPreferences(context));
+        mProviderHelper.clearBut(new CaperPreferences(context));
         assertUserDatabaseSize(2);
 
         // Also test empty values (= clear everything)
@@ -129,7 +129,7 @@ public class TrayProviderHelperTest extends TrayProviderTestCase {
         getProviderMockContext().addProvider(uri.getAuthority(), mockContentProvider);
         getProviderMockContext().enableMockResolver(true);
 
-        assertFalse(mProviderHelper.clearBut(new AppPreferences(getProviderMockContext())));
+        assertFalse(mProviderHelper.clearBut(new CaperPreferences(getProviderMockContext())));
     }
 
     public void testClearFails() throws Exception {

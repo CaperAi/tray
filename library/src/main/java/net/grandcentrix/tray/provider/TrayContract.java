@@ -21,6 +21,8 @@ import net.grandcentrix.tray.core.TrayLog;
 import net.grandcentrix.tray.core.TrayRuntimeException;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Process;
@@ -29,6 +31,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -122,12 +126,14 @@ class TrayContract {
         checkOldWayToSetAuthority(context);
 
         // read all providers of the app and find the TrayContentProvider to read the authority
-        final List<ProviderInfo> providers = context.getPackageManager()
-                .queryContentProviders(context.getPackageName(), Process.myUid(), 0);
+//        final List<ProviderInfo> providers = context.getPackageManager()
+//                .queryContentProviders(context.getPackageName(), Process.myUid(), 0);
+        final List<ProviderInfo> providers = getInstalledProviders(context);
         if (providers != null) {
             for (ProviderInfo provider : providers) {
                 if (provider.name.equals(TrayContentProvider.class.getName())) {
                     sAuthority = provider.authority;
+                    Log.d("zxf", "sAuthority: " + sAuthority);
                     TrayLog.v("found authority: " + sAuthority);
                     return sAuthority;
                 }
@@ -138,5 +144,19 @@ class TrayContract {
         throw new TrayRuntimeException("Internal tray error. "
                 + "Could not find the provider authority. "
                 + "Please fill an issue at https://github.com/grandcentrix/tray/issues");
+    }
+
+    private static List<ProviderInfo> getInstalledProviders(Context context) {
+        final List<PackageInfo> installedPackages =
+                context.getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS);
+        final List<ProviderInfo> providerInfoList = new ArrayList<>();
+        PackageInfo packageInfo;
+        for (int i = 0; i < installedPackages.size(); i++) {
+            packageInfo = installedPackages.get(i);
+            if (packageInfo.providers != null) {
+                Collections.addAll(providerInfoList, packageInfo.providers);
+            }
+        }
+        return providerInfoList;
     }
 }

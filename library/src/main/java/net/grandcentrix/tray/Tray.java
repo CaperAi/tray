@@ -40,7 +40,7 @@ import java.util.List;
  * The {@link android.content.SharedPreferences} uses files to group different preferences. This
  * library uses so called modules. It's common to create a new class extending {@link
  * TrayPreferences} for every new module. For simple Apps and the most common preferences is
- * the class {@link AppPreferences} a good start which uses the app package name to group the
+ * the class {@link CaperPreferences} a good start which uses the app package name to group the
  * preferences.
  */
 public class Tray {

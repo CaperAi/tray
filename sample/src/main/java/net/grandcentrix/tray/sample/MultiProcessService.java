@@ -1,6 +1,6 @@
 package net.grandcentrix.tray.sample;
 
-import net.grandcentrix.tray.AppPreferences;
+import net.grandcentrix.tray.CaperPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
@@ -31,7 +31,7 @@ public class MultiProcessService extends IntentService {
 
     private SharedPreferences mSharedPreferences;
 
-    private AppPreferences mTrayPreferences;
+    private CaperPreferences mTrayPreferences;
 
     /**
      * reads data from shared preferences and tray and prints the values. This happens in a
@@ -60,7 +60,7 @@ public class MultiProcessService extends IntentService {
     public void onCreate() {
         super.onCreate();
 
-        mTrayPreferences = new AppPreferences(this);
+        mTrayPreferences = new CaperPreferences(this);
         mSharedPreferences = getSharedPreferences(SampleActivity.SHARED_PREF_NAME,
                 Context.MODE_MULTI_PROCESS);
     }

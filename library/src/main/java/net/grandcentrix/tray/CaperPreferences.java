@@ -33,11 +33,11 @@ import android.content.Context;
  * data of a single module. This could help keeping the saved data as small as possible across app
  * upgrades.
  */
-public class AppPreferences extends TrayPreferences {
+public class CaperPreferences extends TrayPreferences {
 
     private static final int VERSION = 1;
 
-    public AppPreferences(final Context context) {
-        super(context, context.getPackageName(), VERSION);
+    public CaperPreferences(final Context context) {
+        super(context, VERSION);
     }
 }

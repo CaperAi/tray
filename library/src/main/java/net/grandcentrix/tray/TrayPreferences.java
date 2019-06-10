@@ -28,7 +28,7 @@ import android.support.annotation.NonNull;
  * Created by pascalwelsch on 11/20/14.
  * <p>
  * A {@link Preferences} where the module name depends on the developer. Extending this class
- * should be preferred compared to the usage of the {@link AppPreferences}.
+ * should be preferred compared to the usage of the {@link CaperPreferences}.
  * <p>
  * This class gives the developer the opportunity to remove whole modules without knowing each
  * single preference key.
@@ -37,15 +37,16 @@ import android.support.annotation.NonNull;
  * android.content.ContentProvider}
  */
 public class TrayPreferences extends AbstractTrayPreference<ContentProviderStorage> {
+    private static final String CAPER_SHARED_MODULE = "CAPER";
 
-    public TrayPreferences(@NonNull final Context context, @NonNull final String module,
-            final int version, final TrayStorage.Type type) {
-        super(new ContentProviderStorage(context, module, type), version);
+    public TrayPreferences(@NonNull final Context context,
+                           final int version, final TrayStorage.Type type) {
+        super(new ContentProviderStorage(context, CAPER_SHARED_MODULE, type), version);
     }
 
-    public TrayPreferences(@NonNull final Context context, @NonNull final String module,
-            final int version) {
-        this(context, module, version, TrayStorage.Type.USER);
+    public TrayPreferences(@NonNull final Context context,
+                           final int version) {
+        this(context, version, TrayStorage.Type.USER);
     }
 
     public void annexModule(final String oldStorageName, final TrayStorage.Type type) {
